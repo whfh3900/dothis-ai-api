@@ -1,14 +1,14 @@
 from typing import Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from routers.nlp import classification, predicate, related, channel_similer
+from routers.nlp import classification, related, channel_similer, verb
 from util.log_function import logger
 
 router = APIRouter(prefix="/nlp", tags=["nlp"])
 class SetPrefix(BaseModel):
     parmeter: str = "parmeter"
     
-class PredicateTest(BaseModel):
+class VerbTest(BaseModel):
     related: str = "related"
     keyword: str = "keyword"
 
@@ -16,7 +16,7 @@ class RelatedTest(BaseModel):
     text: str = "text"
     vbr_size: int = 1000  # 기본값을 1000으로 설정
 
-class ClusterTest(BaseModel):
+class ClassificationTest(BaseModel):
     title: str = "title"
     tags: str = "tags"
     description: str = "description"
@@ -31,15 +31,15 @@ class ChannelSimilerTest(BaseModel):
     tags: str = ""
 
 
-@router.post("/predicate")
-async def predicate_test(body: PredicateTest):
-    logger.info(f"Received predicate request with body: {body}")
+@router.post("/verb")
+async def verb_test(body: VerbTest):
+    logger.info(f"Received verb request with body: {body}")
     try:
         body = body.dict()
-        result = await predicate.main(body)
+        result = await verb.main(body)
         
     except Exception as e:
-        logger.error(f"An error occurred in predicate: {str(e)}")
+        logger.error(f"An error occurred in verb: {str(e)}")
     return result
         
 @router.post("/related")
@@ -53,15 +53,15 @@ async def related_test(body: RelatedTest):
         logger.error(f"An error occurred in related: {str(e)}")
     return result
     
-@router.post("/cluster")
-async def cluster_test(body: ClusterTest):
-    logger.info(f"Received cluster request with body: {body}")
+@router.post("/classification")
+async def classification_test(body: ClassificationTest):
+    logger.info(f"Received classification request with body: {body}")
     try:
         body = body.dict()
         result = await classification.main(body)
         
     except Exception as e:
-        logger.error(f"An error occurred in cluster: {str(e)}")
+        logger.error(f"An error occurred in classification: {str(e)}")
     return result
 
 @router.post("/channelsimiler")
