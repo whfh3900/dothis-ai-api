@@ -1,7 +1,7 @@
 from typing import Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from routers.nlp import cluster, predicate, related, channel_similer
+from routers.nlp import classification, predicate, related, channel_similer
 from util.log_function import logger
 
 router = APIRouter(prefix="/nlp", tags=["nlp"])
@@ -58,7 +58,7 @@ async def cluster_test(body: ClusterTest):
     logger.info(f"Received cluster request with body: {body}")
     try:
         body = body.dict()
-        result = await cluster.main(body)
+        result = await classification.main(body)
         
     except Exception as e:
         logger.error(f"An error occurred in cluster: {str(e)}")

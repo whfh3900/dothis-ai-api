@@ -10,7 +10,7 @@ dotenv_path = os.path.join(".", '.env')
 # .env 파일 로드
 load_dotenv(dotenv_path)
 
-class VideoCluster():
+class VideoClassification():
     def __init__(self, data_path="./usedata", cache_dir="/home/suchoi/dothis-ai/models/huggingface", use_cuda=True):
         
         self.data_path = data_path
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     
     data_path="./usedata"
     cache_dir="/home/suchoi/dothis-ai/models/huggingface"
-    vc = VideoCluster(data_path=data_path,
+    vc = VideoClassification(data_path=data_path,
                       cache_dir=cache_dir)
     
     print(vc.response(title=title, category=category, tags=tags, description=description))

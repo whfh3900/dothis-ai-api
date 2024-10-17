@@ -638,8 +638,8 @@ class WeeklyKeywords():
         return new_df
 
 
-class Predicate():
-    def __init__(self, stopwords_path="../usedata/stopwords_for_predicate.txt",
+class Verb():
+    def __init__(self, stopwords_path="../usedata/stopwords_for_verb.txt",
                  mecab_dic_path=None, match_poss=None, not_match_poss=None):
 
         # Mecab 형태소 분석기 초기화

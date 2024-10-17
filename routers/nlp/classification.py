@@ -5,7 +5,7 @@ import sys
 sys.path.append("./")
 sys.path.append("/app/routers/nlp/nlp_util")
 sys.path.append("./routers/nlp/nlp_util")
-from api_cluster import VideoCluster
+from api_classification import VideoClassification
 from util.log_function import logger
 from util.redis_keyvault import get_info
 from dotenv import load_dotenv
@@ -24,7 +24,7 @@ if path is None:
 data_path = "/app/usedata"
 cache_dir = '/app/models/huggingface'
 use_cuda = True if int(os.getenv('USE_CUDA', 0)) == 1 else False
-vc = VideoCluster(data_path=data_path,
+vc = VideoClassification(data_path=data_path,
                     cache_dir=cache_dir,
                     use_cuda=use_cuda)
 

@@ -8,7 +8,7 @@ sys.path.append("/app/routers/nlp/nlp_util")
 sys.path.append("./routers/nlp/nlp_util")
 import traceback
 from fastapi.responses import JSONResponse
-from dothis_keyword import Predicate
+from dothis_keyword import Verb
 env = get_info("dothis-fastapi-ai")
 path = env.get('LAMBDA_TASK_ROOT')
 from dotenv import load_dotenv
@@ -22,9 +22,9 @@ if path is None:
 
 mecab_dic_path = f"{path}/mecab-ko-dic-2.1.1-20180720"
 data_path = "/app/usedata"
-stopwords_path = os.path.join(data_path, "stopwords_for_predicate.txt")
+stopwords_path = os.path.join(data_path, "stopwords_for_verb.txt")
 
-predicate = Predicate(stopwords_path=stopwords_path, mecab_dic_path=f"{path}/mecab-ko-dic-2.1.1-20180720")
+predicate = Verb(stopwords_path=stopwords_path, mecab_dic_path=f"{path}/mecab-ko-dic-2.1.1-20180720")
 
 async def main(body: dict):
     try:
